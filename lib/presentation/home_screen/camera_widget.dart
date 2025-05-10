@@ -311,6 +311,8 @@ class _CameraWidgetState extends State<CameraWidget>
                                 ),
                                 prefixIcon: IconButton(
                                   onPressed: () {
+                                    FocusScope.of(context).unfocus();
+                                    _queryTextController.clear();
                                     _slideController.reverse();
                                     _cameraAnimateController
                                       ..reset()
@@ -329,6 +331,7 @@ class _CameraWidgetState extends State<CameraWidget>
                                   onPressed: geminiNotifier.isProcessing
                                       ? null
                                       : () async {
+                                          FocusScope.of(context).unfocus();
                                           final navigator =
                                               Navigator.of(context);
                                           query = _queryTextController.text;
@@ -374,11 +377,7 @@ class _CameraWidgetState extends State<CameraWidget>
           () {
             _isImageCaptured = true;
             imageFile = file;
-            // Future.delayed(Duration(milliseconds: 90), () {
-            // _controller
-            //   ..reset()
-            //   ..forward();
-            // });
+
             _controller
               ..reset()
               ..forward();

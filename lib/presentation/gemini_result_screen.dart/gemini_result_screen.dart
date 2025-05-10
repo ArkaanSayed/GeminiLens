@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:vector_math/vector_math_64.dart' show Vector3;
 
 class GeminiResultScreen extends StatefulWidget {
@@ -35,7 +36,7 @@ class _GeminiResultScreenState extends State<GeminiResultScreen> {
   }
 
   void _startTypingAnimation() {
-    _timer = Timer.periodic(const Duration(milliseconds: 16), (timer) {
+    _timer = Timer.periodic(const Duration(milliseconds: 8), (timer) {
       if (currentIndex < widget.description.length) {
         setState(() {
           displayedText = widget.description.substring(0, currentIndex + 1);
@@ -134,8 +135,7 @@ class _GeminiResultScreenState extends State<GeminiResultScreen> {
               ),
             ),
           ),
-          SliverFillRemaining(
-            hasScrollBody: true,
+          SliverToBoxAdapter(
             child: Container(
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
@@ -143,29 +143,31 @@ class _GeminiResultScreenState extends State<GeminiResultScreen> {
                   topRight: Radius.circular(20),
                 ),
               ),
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.only(
+                left: 20,
+                right: 20.0,
+                top: 20.0,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Text(
+                  Text(
                     'Analysis Results',
-                    style: TextStyle(
+                    style: GoogleFonts.montserrat(
                       color: Colors.black,
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 20),
-                  Expanded(
-                    child: RichText(
-                      text: TextSpan(
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          // height: 1.5,
-                        ),
-                        children: _buildAnimatedTextSpans(displayedText),
+                  RichText(
+                    text: TextSpan(
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        // height: 1.5,
                       ),
+                      children: _buildAnimatedTextSpans(displayedText),
                     ),
                   ),
                 ],
@@ -189,16 +191,18 @@ class _GeminiResultScreenState extends State<GeminiResultScreen> {
           spans.add(
             TextSpan(
               text: '• ',
-              style: const TextStyle(
+              style: GoogleFonts.montserrat(
                 color: Color(0xff8AAAE5),
-                fontSize: 20,
+                fontSize: 18,
               ),
             ),
           );
           spans.add(
             TextSpan(
               text: parts[1],
-              style: const TextStyle(
+              style: GoogleFonts.montserrat(
+                fontSize: 16.0,
+                height: 1.8,
                 fontWeight: FontWeight.bold,
                 color: Color(0xff8AAAE5),
               ),
@@ -207,12 +211,21 @@ class _GeminiResultScreenState extends State<GeminiResultScreen> {
           spans.add(
             TextSpan(
               text: parts[2],
-              style: const TextStyle(color: Colors.black87),
+              style: GoogleFonts.montserrat(
+                color: Colors.black87,
+                height: 1.4,
+                fontSize: 16,
+              ),
             ),
           );
         } else {
           spans.add(
-            TextSpan(text: line),
+            TextSpan(
+              text: line,
+              style: GoogleFonts.montserrat(
+                fontSize: 16,
+              ),
+            ),
           );
         }
       } else if (line.trim().isEmpty) {
@@ -221,7 +234,12 @@ class _GeminiResultScreenState extends State<GeminiResultScreen> {
       } else {
         // Regular text
         spans.add(
-          TextSpan(text: line),
+          TextSpan(
+            text: line,
+            style: GoogleFonts.openSans(
+              fontSize: 16,
+            ),
+          ),
         );
       }
       spans.add(const TextSpan(text: '\n'));
@@ -229,13 +247,15 @@ class _GeminiResultScreenState extends State<GeminiResultScreen> {
 
     // Add blinking cursor at the end
     if (currentIndex < widget.description.length) {
-      spans.add(const TextSpan(
-        text: '|',
-        style: TextStyle(
-          color: Color(0xff8AAAE5),
-          fontWeight: FontWeight.bold,
+      spans.add(
+        const TextSpan(
+          text: '|',
+          style: TextStyle(
+            color: Color(0xff8AAAE5),
+            fontWeight: FontWeight.bold,
+          ),
         ),
-      ));
+      );
     }
 
     return spans;
