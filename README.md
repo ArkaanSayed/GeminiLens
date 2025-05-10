@@ -1,4 +1,4 @@
-# GEMINILENS
+# GEMINI LENS
 
 A AI lens, where the user can click a photo and ask anything about it. Built with Flutter and the Gemini API.
 
