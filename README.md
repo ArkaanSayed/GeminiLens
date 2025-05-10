@@ -5,7 +5,11 @@ A AI lens, where the user can click a photo and ask anything about it. Built wit
 # Project Demo
 
 
-https://github.com/user-attachments/assets/de3ab009-5907-481d-9bdf-8a4a705629b0
+
+https://github.com/user-attachments/assets/34a40967-cdde-4648-98ea-692783045c1f
+
+
+
 
 
 
