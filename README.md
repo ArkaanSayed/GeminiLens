@@ -12,8 +12,9 @@ https://github.com/user-attachments/assets/de3ab009-5907-481d-9bdf-8a4a705629b0
 ## Getting Started
 
 To get started you will have to create an API key from https://ai.google.dev/gemini-api/docs.
+
 After creating the api key in the root folder create a file with the name .env => add "GEMINI_API_KEY" and paste your API key that you created.
-Then you can launch the app.
+
 
 ## Project Structure
 
